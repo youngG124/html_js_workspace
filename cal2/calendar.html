@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simple Calendar</title>
+  <title>Calendar with Images</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,31 +17,40 @@
     }
     #calendar {
       width: 100%;
-      height: 100vh; /* Set calendar height to 100% of viewport height */
+      height: 100vh;
       max-width: 600px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
-    #calendar-body {
-      transition: opacity 0.4s ease;
-    }
     table {
       width: 100%;
       height: 100%;
       border-collapse: collapse;
-      table-layout: fixed; /* Ensures cells are of equal width */
+      table-layout: fixed;
     }
     th, td {
-      padding: 10px;
+      padding: 5px;
       border: 1px solid #ddd;
-      text-align: center;
+      text-align: left;
+      vertical-align: top; /* Aligns numbers to the top */
+      position: relative;
     }
-    th {
-      background-color: #f4f4f4;
+    td img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures the image covers the whole cell */
+      z-index: 0;
+      opacity: 0.3; /* Optional: make the image slightly transparent */
     }
-    td {
-      height: calc(100% / 6); /* Divide remaining space equally among rows */
+    td .day-number {
+      position: relative;
+      z-index: 1; /* Keeps the number on top of the image */
+      padding: 5px;
+      font-weight: bold;
     }
     h2 {
       margin: 0;
@@ -78,8 +87,10 @@
       </thead>
       <tbody id="calendar-body"></tbody>
     </table>
-    <button id="prev-month" class="prev-next">Previous Month</button>
-    <button id="next-month" class="prev-next">Next Month</button>
+    <div class="button-container">
+      <button id="prev-month" class="prev-next">Previous Month</button>
+      <button id="next-month" class="prev-next">Next Month</button>
+    </div>
   </div>
 
   <script src="calendar.js"></script>
