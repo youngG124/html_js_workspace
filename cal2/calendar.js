@@ -8,7 +8,7 @@ function loadCalendar(date) {
   calendarBody.innerHTML = '';
 
   const year = date.getFullYear();
-  const month = date.getMonth();
+  let month = date.getMonth();
   
   // Get first and last day of the month
   const firstDayOfMonth = new Date(year, month, 1).getDay();
@@ -40,7 +40,13 @@ function loadCalendar(date) {
 
         const img = document.createElement('img');
         // Replace 'your-image-path.jpg' with the path to your actual image
-        img.src = `https://via.placeholder.com/150?text=${day}`; 
+        // img.src = `https://via.placeholder.com/150?text=${day}`;
+        //img.src = `imgs/${year}${month}`;
+        let srcimg = 'C:/Users/user/Desktop/vsCode/html_js_workspace/cal2/imgs/' + searchImage(year,month+1,day);
+        if(doesFileExist(srcimg)) {
+          console.log(srcimg)
+          img.src = `${srcimg}`
+        }
 
         cell.appendChild(img); // Add the image to the cell
         cell.appendChild(dayNumber); // Add the day number on top
@@ -52,6 +58,35 @@ function loadCalendar(date) {
     calendarBody.appendChild(row);
   }
 }
+
+function searchImage(year, month, day) {
+  if(month.toString().length == 1) {
+    month = '0' + month
+  }
+  if(day.toString().length == 1) {
+    day = '0' + day
+  }
+
+  return year.toString() + month.toString() + day.toString() + '_0.png';
+}
+
+function doesFileExist(urlToFile)
+{
+    var xhr = new XMLHttpRequest();
+    xhr.open('HEAD', urlToFile, false);
+    xhr.send();
+
+    if (xhr.status == "404") {
+        console.log("파일이 존재하지 않아요!");
+        return false;
+    } else {
+        console.log("파일이 있어요.");
+        return true;
+    }
+    var xhr = null;
+}
+
+
 
 // Detect scroll to switch months
 document.addEventListener('wheel', function(event) {
