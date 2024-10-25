@@ -42,7 +42,7 @@ function loadCalendar(date) {
         // Replace 'your-image-path.jpg' with the path to your actual image
         // img.src = `https://via.placeholder.com/150?text=${day}`;
         //img.src = `imgs/${year}${month}`;
-        let srcimg = 'C:/Users/user/Desktop/vsCode/html_js_workspace/cal2/imgs/' + searchImage(year,month+1,day);
+        let srcimg = 'http://127.0.0.1:8000/image/' + searchImage(year,month+1,day);
         if(doesFileExist(srcimg)) {
           console.log(srcimg)
           img.src = `${srcimg}`
@@ -67,13 +67,13 @@ function searchImage(year, month, day) {
     day = '0' + day
   }
 
-  return year.toString() + month.toString() + day.toString() + '_0.png';
+  return year.toString() + month.toString() + day.toString() + '_0';
 }
 
 function doesFileExist(urlToFile)
 {
     var xhr = new XMLHttpRequest();
-    xhr.open('HEAD', urlToFile, false);
+    xhr.open('GET', urlToFile, false);
     xhr.send();
 
     if (xhr.status == "404") {
@@ -85,8 +85,6 @@ function doesFileExist(urlToFile)
     }
     var xhr = null;
 }
-
-
 
 // Detect scroll to switch months
 document.addEventListener('wheel', function(event) {
