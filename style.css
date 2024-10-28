@@ -53,6 +53,16 @@ body {
     background-color: #444;
 }
 
+/* Align right-side menu items */
+.menu-right {
+    margin-left: auto; /* Moves Tech and Opinion to the right */
+    display: flex;
+}
+
+.menu-right a:hover {
+    background-color: #444;
+}
+
 /* Blog Content Area */
 .blog-content {
     display: flex;
