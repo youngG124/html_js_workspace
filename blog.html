@@ -4,161 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Discipline Tracing</title>
-    <style>
-        /* Basic Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+    <link rel="stylesheet" href="style.css">
+    <script>
+        function includeHTML() {
+            document.querySelectorAll("[data-include]").forEach(el => {
+                const file = el.getAttribute("data-include");
+                fetch(file)
+                    .then(response => response.text())
+                    .then(data => el.innerHTML = data)
+                    .catch(error => console.error('Error loading HTML:', error));
+            });
         }
-
-        body {
-            font-family: Georgia, serif;
-            line-height: 1.6;
-            background-color: #f4f4f4;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Blog Header */
-        .blog-header {
-            text-align: center;
-            padding: 20px;
-            background-color: #fff;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .blog-header h1 {
-            font-size: 3rem;
-            font-family: 'Times New Roman', Times, serif;
-            font-weight: bold;
-            color: #333;
-            letter-spacing: 1px;
-        }
-
-        /* Menu Bar */
-        .menu-bar {
-            display: flex;
-            justify-content: flex-start;
-            background-color: #333;
-            padding-left: 20px;
-            border-bottom: 2px solid #222;
-        }
-
-        .menu-bar a {
-            color: #eee;
-            padding: 15px 25px;
-            text-decoration: none;
-            font-size: 1rem;
-            font-family: Arial, sans-serif;
-            transition: background-color 0.3s ease;
-        }
-
-        .menu-bar a:hover {
-            background-color: #444;
-        }
-
-        /* Blog Content Area */
-        .blog-content {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: #fff;
-        }
-
-        .blog-post {
-            padding: 20px;
-            border-bottom: 1px solid #ddd;
-            color: #333;
-        }
-
-        .blog-post h2 {
-            margin-bottom: 10px;
-            font-size: 1.8rem;
-            font-family: 'Times New Roman', Times, serif;
-            font-weight: bold;
-        }
-
-        .blog-post p {
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-        }
-
-        .blog-post img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-        }
-
-        /* GitHub-style Grass Grid for 365 Days */
-        .grass-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 15px); /* 7 columns for each day of the week */
-            grid-gap: 3px;
-            max-width: 120px; /* Adjusts overall grid width */
-            margin-top: 10px;
-        }
-
-        .day {
-            width: 15px;
-            height: 15px;
-            border-radius: 2px;
-            background-color: #ebedf0; /* Default color for no activity */
-        }
-
-        /* Different shades for different activity levels */
-        .day[data-level="0"] { background-color: #ebedf0; } /* No activity */
-        .day[data-level="1"] { background-color: #c6e48b; }
-        .day[data-level="2"] { background-color: #7bc96f; }
-        .day[data-level="3"] { background-color: #239a3b; }
-        .day[data-level="4"] { background-color: #196127; } /* High activity */
-
-        /* Footer */
-        .footer {
-            background-color: #333;
-            color: #eee;
-            text-align: center;
-            padding: 20px;
-            font-size: 0.9rem;
-            font-family: Arial, sans-serif;
-        }
-
-        .footer p {
-            margin: 5px 0;
-        }
-
-        .footer a {
-            color: #ffb3b3;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+        window.onload = includeHTML;
+    </script>
 </head>
 <body>
 
-    <!-- Blog Header -->
-    <header class="blog-header">
-        <h1>Discipline Tracker</h1>
-    </header>
+    <!-- Header Section -->
+    <div data-include="header.html"></div>
 
     <!-- Menu Bar -->
-    <nav class="menu-bar">
-        <a href="#">Home</a>
-        <a href="#">About</a>
-        <a href="#">Image</a>
-        <a href="#">Discipline</a>
-        <a href="#">Tech</a>
-        <a href="#">Opinion</a>
-    </nav>
+    <div data-include="menu.html"></div>
 
     <!-- Blog Content Area -->
     <main class="blog-content">
@@ -166,10 +32,11 @@
         <div class="blog-post">
             <h2>About this Blog</h2>
             <p>
-                This blog is for tracking disciplines, view some of saved images.
+                This customized blog is for tracking disciplines, view some of saved images.
                 <br>Blog's server is on EC2(AWS), made of SpringBoot,
                 <br>Images are on local SSD and fastAPI(python) is serving it.
-                <br>You can contact me at : newyoung124@naver.com
+                <br>Visit 'about' and check more information.
+                <br>You can contact me at: newyoung124@naver.com
             </p>
         </div>
 
@@ -186,24 +53,6 @@
             </div>
         </div>
 
-        <style>
-            /* Image Grid Styles */
-            .image-grid {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr); /* 3 columns */
-                grid-template-rows: repeat(2, auto);   /* 2 rows */
-                gap: 10px;
-                margin-top: 10px;
-            }
-
-            .image-grid img {
-                width: 100%;
-                height: auto;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-        </style>
-
         <!-- Example Blog Post with Special HTML Content -->
         <div class="blog-post">
             <h2>Opinion: Technology's Role in Society</h2>
@@ -215,10 +64,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <p>Contact us at: <a href="mailto:info@simpleblog.com">newyoung124@naver.com</a></p>
-        <p>"Embrace each day as a fresh opportunity to grow and explore."</p>
-    </footer>
+    <div data-include="footer.html"></div>
 
 </body>
 </html>
