@@ -83,7 +83,6 @@ function doesFileExist(urlToFile)
         console.log("파일이 있어요.");
         return true;
     }
-    var xhr = null;
 }
 
 // Detect scroll to switch months
