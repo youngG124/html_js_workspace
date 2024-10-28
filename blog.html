@@ -43,7 +43,45 @@
         <!-- Example Blog Post with Image Grid -->
         <div class="blog-post">
             <h2>Disciplines</h2>
+            <div id="annual_calendar_1">
+
+            </div>
+            <div id="annual_calendar_2">
+
+            </div>
             
+            <script>
+                function createCalendar(elementId) {
+                    tbody = document.createElement('table');
+                    tbody.style = 'border-spacing:5px;';
+                
+                    const day_arr = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+                    const week_arr = [];
+                
+                    for(let i=0; i<53; i++) {
+                        week_arr.push(i);
+                    }
+                    
+                    day_arr.forEach(function(day) {
+                        let row = document.createElement('tr');
+                        row.className = day;
+                
+                        week_arr.forEach(function(week) {
+                            let col = document.createElement('td');           
+                
+                            col.style = 'width:12px; height:14px; background-Color:lightgrey; border-radius:2px;';
+                            row.appendChild(col);
+                        });
+                
+                        tbody.appendChild(row);
+                    });
+                
+                    document.getElementById(elementId).appendChild(tbody);
+                }
+                
+                createCalendar('annual_calendar_1')
+                createCalendar('annual_calendar_2')
+            </script>
         </div>
 
         <!-- Example Blog Post with Image Grid -->
