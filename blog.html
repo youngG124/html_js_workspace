@@ -96,6 +96,29 @@
             border: 1px solid #ccc;
         }
 
+        /* GitHub-style Grass Grid for 365 Days */
+        .grass-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 15px); /* 7 columns for each day of the week */
+            grid-gap: 3px;
+            max-width: 120px; /* Adjusts overall grid width */
+            margin-top: 10px;
+        }
+
+        .day {
+            width: 15px;
+            height: 15px;
+            border-radius: 2px;
+            background-color: #ebedf0; /* Default color for no activity */
+        }
+
+        /* Different shades for different activity levels */
+        .day[data-level="0"] { background-color: #ebedf0; } /* No activity */
+        .day[data-level="1"] { background-color: #c6e48b; }
+        .day[data-level="2"] { background-color: #7bc96f; }
+        .day[data-level="3"] { background-color: #239a3b; }
+        .day[data-level="4"] { background-color: #196127; } /* High activity */
+
         /* Footer */
         .footer {
             background-color: #333;
@@ -124,15 +147,15 @@
 
     <!-- Blog Header -->
     <header class="blog-header">
-        <h1>Discipline Tracer</h1>
+        <h1>Discipline Tracker</h1>
     </header>
 
     <!-- Menu Bar -->
     <nav class="menu-bar">
         <a href="#">Home</a>
-        <a href="#">World</a>
-        <a href="#">Politics</a>
-        <a href="#">Business</a>
+        <a href="#">About</a>
+        <a href="#">Image</a>
+        <a href="#">Discipline</a>
         <a href="#">Tech</a>
         <a href="#">Opinion</a>
     </nav>
@@ -141,16 +164,45 @@
     <main class="blog-content">
         <!-- Example Blog Post with Text -->
         <div class="blog-post">
-            <h2>Welcome to My Blog</h2>
-            <p>This is a simple blog template where you can write articles, share images, and much more! This style takes inspiration from traditional newspaper layouts for a structured reading experience.</p>
+            <h2>About this Blog</h2>
+            <p>
+                This blog is for tracking disciplines, view some of saved images.
+                <br>Blog's server is on EC2(AWS), made of SpringBoot,
+                <br>Images are on local SSD and fastAPI(python) is serving it.
+                <br>You can contact me at : newyoung124@naver.com
+            </p>
         </div>
 
-        <!-- Example Blog Post with Image -->
+        <!-- Example Blog Post with Image Grid -->
         <div class="blog-post">
             <h2>Latest Images</h2>
-            <img src="https://via.placeholder.com/800x400" alt="Business">
-            <p>The latest updates in the business world, covering trends, stocks, and economic analysis. Visual content can be embedded to provide context and enhance the reading experience.</p>
+            <div class="image-grid">
+                <img src="https://via.placeholder.com/400x400" alt="Image 1">
+                <img src="https://via.placeholder.com/400x400" alt="Image 2">
+                <img src="https://via.placeholder.com/400x400" alt="Image 3">
+                <img src="https://via.placeholder.com/400x400" alt="Image 4">
+                <img src="https://via.placeholder.com/400x400" alt="Image 5">
+                <img src="https://via.placeholder.com/400x400" alt="Image 6">
+            </div>
         </div>
+
+        <style>
+            /* Image Grid Styles */
+            .image-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr); /* 3 columns */
+                grid-template-rows: repeat(2, auto);   /* 2 rows */
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            .image-grid img {
+                width: 100%;
+                height: auto;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+        </style>
 
         <!-- Example Blog Post with Special HTML Content -->
         <div class="blog-post">
