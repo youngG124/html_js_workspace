@@ -52,17 +52,21 @@
                 <div id="annual_calendar_2"></div>
             </div>
             <script>
+                const today = new Date();
+                const dayIndex = today.getDay();
+
                 function createCalendar(elementId) {
                     tbody = document.createElement('table');
                     tbody.style = 'border-spacing:5px;';
 
                     const week_arr = [];
                 
-                    for(let i=0; i<53; i++) {
+                    // add just 52 week, and add additional days at last
+                    for(let i=0; i<52; i++) {
                         week_arr.push(i);
                     }
 
-                    const dayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+                    const dayNames = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
                     const day_arr = [];
 
                     const disciplineRecord = [];
@@ -89,7 +93,7 @@
                     week_arr.forEach(function(week) {
                         day_arr.forEach(function(day) {
                             let row = document.createElement('td');
-                            styleString = 'width:12px; height:12px; border-radius:2px;';
+                            styleString = 'width:15px; height:10px; border-radius:2px;';
                             if(disciplineRecord[dayNumber] == 0) {
                                 styleString += 'background-Color:lightgrey;'
                             } else {
@@ -102,8 +106,31 @@
                             day.appendChild(row);
                         });
                     });
+
+                    // 마지막 주는 요일에 대해 동적으로 처리
+                    dayNumber = 364;
+                    day_arr.forEach(function(day, index) {
+                        if(index < dayIndex) {
+                            let row = document.createElement('td');
+                            styleString = 'width:15px; height:10px; border-radius:2px;';
+                            if(disciplineRecord[dayNumber] == 0) {
+                                styleString += 'background-Color:lightgrey;'
+                            } else {
+                                styleString += 'background-Color:green;'
+                            }
+
+                            row.style = styleString;
+                            row.className = dayNumber;
+                            dayNumber++;
+                            day.appendChild(row);
+                        }
+                    });
                 
                     document.getElementById(elementId).appendChild(tbody);
+                }
+
+                function createOneDay () {
+
                 }
                 
                 createCalendar('annual_calendar_1')
