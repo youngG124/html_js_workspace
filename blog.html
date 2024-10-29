@@ -55,32 +55,50 @@
                 function createCalendar(elementId) {
                     tbody = document.createElement('table');
                     tbody.style = 'border-spacing:5px;';
-                
-                    const day_arr = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+
                     const week_arr = [];
                 
                     for(let i=0; i<53; i++) {
                         week_arr.push(i);
                     }
 
-                    let sun = document.createElement('tr');
-                    let mon = document.createElement('tr');
-                    let tue = document.createElement('tr');
-                    let wed = document.createElement('tr');
-                    let thu = document.createElement('tr');
-                    let fri = document.createElement('tr');
-                    let sat = document.createElement('tr');
+                    const dayNames = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
+                    const day_arr = [];
 
-                    const day_arr2 = [sun, mon, tue, wed, thu, fri, sat]
+                    const disciplineRecord = [];
 
-                    day_arr2.forEach(function(day) {
+                    for(let i=0; i<365; i++) {
+                        if(i%2 == 0) {
+                            disciplineRecord.push(0);
+                        } else {
+                            disciplineRecord.push(1);
+                        }
+                    }
+
+                    dayNames.forEach(dayName => {
+                        let day = document.createElement('tr'); // Create a new row element
+                        day.className = dayName; // Optionally add a class with the day's name
+                        day_arr.push(day); // Add the created row to the array
+                    });
+
+                    day_arr.forEach(function(day) {
                         tbody.appendChild(day);
                     });
 
+                    dayNumber = 0;
                     week_arr.forEach(function(week) {
-                        day_arr2.forEach(function(day) {
+                        day_arr.forEach(function(day) {
                             let row = document.createElement('td');
-                            row.style = 'width:12px; height:12px; background-Color:lightgrey; border-radius:2px;';      
+                            styleString = 'width:12px; height:12px; border-radius:2px;';
+                            if(disciplineRecord[dayNumber] == 0) {
+                                styleString += 'background-Color:lightgrey;'
+                            } else {
+                                styleString += 'background-Color:green;'
+                            }
+
+                            row.style = styleString;
+                            row.className = dayNumber;
+                            dayNumber++;
                             day.appendChild(row);
                         });
                     });
