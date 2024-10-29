@@ -92,16 +92,7 @@
                     dayNumber = 0;
                     week_arr.forEach(function(week) {
                         day_arr.forEach(function(day) {
-                            let row = document.createElement('td');
-                            styleString = 'width:15px; height:10px; border-radius:2px;';
-                            if(disciplineRecord[dayNumber] == 0) {
-                                styleString += 'background-Color:lightgrey;'
-                            } else {
-                                styleString += 'background-Color:green;'
-                            }
-
-                            row.style = styleString;
-                            row.className = dayNumber;
+                            let row = createRow(disciplineRecord[dayNumber]);
                             dayNumber++;
                             day.appendChild(row);
                         });
@@ -111,16 +102,7 @@
                     dayNumber = 364;
                     day_arr.forEach(function(day, index) {
                         if(index < dayIndex) {
-                            let row = document.createElement('td');
-                            styleString = 'width:15px; height:10px; border-radius:2px;';
-                            if(disciplineRecord[dayNumber] == 0) {
-                                styleString += 'background-Color:lightgrey;'
-                            } else {
-                                styleString += 'background-Color:green;'
-                            }
-
-                            row.style = styleString;
-                            row.className = dayNumber;
+                            let row = createRow(disciplineRecord[dayNumber]);
                             dayNumber++;
                             day.appendChild(row);
                         }
@@ -129,8 +111,19 @@
                     document.getElementById(elementId).appendChild(tbody);
                 }
 
-                function createOneDay () {
+                function createRow(recordType) {
+                    let row = document.createElement('td');
+                    styleString = 'width:15px; height:10px; border-radius:2px;';
+                    if(recordType == 0) {
+                        styleString += 'background-Color:lightgrey;'
+                    } else {
+                        styleString += 'background-Color:green;'
+                    }
 
+                    row.style = styleString;
+                    row.className = dayNumber;
+
+                    return row;
                 }
                 
                 createCalendar('annual_calendar_1')
