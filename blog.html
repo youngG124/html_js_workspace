@@ -69,14 +69,25 @@
                     const dayNames = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
                     const day_arr = [];
 
-                    const disciplineRecord = [];
+                    const originalDisciplineRecord = [0, 1, 0, 1]; // get this from database
+                    const defaultDisciplineRecord = [];
 
-                    for(let i=0; i<365; i++) {
-                        if(i%2 == 0) {
-                            disciplineRecord.push(0);
-                        } else {
-                            disciplineRecord.push(1);
+                    // 기본 설정
+                    for(let i=0; i<364; i++) {
+                        defaultDisciplineRecord.push(0);
+                    }
+                    for(let i=0; i<dayIndex; i++) {
+                        defaultDisciplineRecord.push(0);
+                    }
+                    // 기본 설정 날보다 작다면
+                    if(originalDisciplineRecord.length < defaultDisciplineRecord.length) {
+                        // 저장 된 날 만큼 pop 후 data를 채우기
+                        for(let i=0; i<originalDisciplineRecord.length; i++) {
+                            defaultDisciplineRecord.pop();
                         }
+                        disciplineRecord = defaultDisciplineRecord.concat(originalDisciplineRecord);
+                    } else { // 기본 설정 일자 수 보다 크다면
+                        // discipline 
                     }
 
                     dayNames.forEach(dayName => {
@@ -109,15 +120,18 @@
                     });
                 
                     document.getElementById(elementId).appendChild(tbody);
-                }
+                }                
+                
+                createCalendar('annual_calendar_1')
+                createCalendar('annual_calendar_2')
 
                 function createRow(recordType, dayNumber) {
                     let row = document.createElement('td');
                     styleString = 'width:15px; height:10px; border-radius:2px;';
-                    if(recordType == 0) {
-                        styleString += 'background-Color:lightgrey;'
-                    } else {
+                    if(recordType == 1) {
                         styleString += 'background-Color:green;'
+                    } else {
+                        styleString += 'background-Color:lightgrey;'
                     }
 
                     let day_data_string = "date : " + subtractDays(today, 365 - dayNumber);
@@ -129,14 +143,10 @@
 
                     return row;
                 }
-                
-                createCalendar('annual_calendar_1')
-                createCalendar('annual_calendar_2')
 
                 // Function to subtract days from a date
                 function subtractDays(date, days) {
                     const result = new Date(date); // Create a copy of the date
-                    console.log(result);
                     result.setDate(result.getDate() - days); // Subtract days
                     return result.toDateString();
                 }
