@@ -92,7 +92,7 @@
                     dayNumber = 0;
                     week_arr.forEach(function(week) {
                         day_arr.forEach(function(day) {
-                            let row = createRow(disciplineRecord[dayNumber]);
+                            let row = createRow(disciplineRecord[dayNumber], dayNumber);
                             dayNumber++;
                             day.appendChild(row);
                         });
@@ -102,7 +102,7 @@
                     dayNumber = 364;
                     day_arr.forEach(function(day, index) {
                         if(index < dayIndex) {
-                            let row = createRow(disciplineRecord[dayNumber]);
+                            let row = createRow(disciplineRecord[dayNumber], dayNumber);
                             dayNumber++;
                             day.appendChild(row);
                         }
@@ -111,7 +111,7 @@
                     document.getElementById(elementId).appendChild(tbody);
                 }
 
-                function createRow(recordType) {
+                function createRow(recordType, dayNumber) {
                     let row = document.createElement('td');
                     styleString = 'width:15px; height:10px; border-radius:2px;';
                     if(recordType == 0) {
@@ -120,16 +120,31 @@
                         styleString += 'background-Color:green;'
                     }
 
+                    let day_data_string = "date : " + subtractDays(today, 365 - dayNumber);
+
+                    row.setAttribute('data-info', day_data_string);
+                    row.className = 'day';
                     row.style = styleString;
-                    row.className = dayNumber;
+                    row.id = dayNumber;
 
                     return row;
                 }
                 
                 createCalendar('annual_calendar_1')
                 createCalendar('annual_calendar_2')
+
+                // Function to subtract days from a date
+                function subtractDays(date, days) {
+                    const result = new Date(date); // Create a copy of the date
+                    console.log(result);
+                    result.setDate(result.getDate() - days); // Subtract days
+                    return result.toDateString();
+                }
             </script>
         </div>
+
+        <!-- Box to display on hover -->
+        <div id="infoBox" class="info-box"></div>
 
         <!-- Example Blog Post with Image Grid -->
         <div class="blog-post">
@@ -151,7 +166,7 @@
                 <iframe 
                     width="560" 
                     height="315" 
-                    src="https://www.youtube.com/embed/3uiUHvET_jg?si=BAYiqlXBfI_vJscw&autoplay=1&mute=0" 
+                    src="https://www.youtube.com/embed/3uiUHvET_jg?si=BAYiqlXBfI_vJscw&autoplay=1&mute=1" 
                     title="YouTube video player" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
@@ -165,5 +180,32 @@
     <!-- Footer -->
     <div data-include="footer.html"></div>
 
+    <script>
+        const infoBox = document.getElementById('infoBox');
+
+        // Function to show the info box with specific content
+        function showInfoBox(event, content) {
+            infoBox.style.display = 'block';
+            infoBox.style.left = `${event.pageX + 10}px`; // Position next to the mouse
+            infoBox.style.top = `${event.pageY + 10}px`;
+            infoBox.textContent = content; // Set the information content
+        }
+
+        // Function to hide the info box
+        function hideInfoBox() {
+            infoBox.style.display = 'none';
+        }
+
+        // Add event listeners to each hoverable <td> for showing/hiding the info box
+        document.querySelectorAll('.day').forEach(td => {
+            td.addEventListener('mouseenter', (event) => {
+                showInfoBox(event, td.getAttribute('data-info'));
+            });
+            td.addEventListener('mousemove', (event) => {
+                showInfoBox(event, td.getAttribute('data-info'));
+            });
+            td.addEventListener('mouseleave', hideInfoBox);
+        });
+    </script>
 </body>
 </html>
