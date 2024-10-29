@@ -32,7 +32,7 @@
         <div class="blog-post">
             <h2>This blog is..</h2>
             <p>
-                This blog is for tracking disciplines, view some of saved images.
+                This blog is for tracking disciplines, curating some of saved images.
                 <br>Blog's server is on EC2(AWS), made of SpringBoot(Java),
                 <br>Images are on local SSD and fastAPI(python) is serving it.
                 <br>Visit 'about' and check more information.
@@ -43,13 +43,14 @@
         <!-- Example Blog Post with Image Grid -->
         <div class="blog-post">
             <h2>Disciplines</h2>
-            <div id="annual_calendar_1">
-
+            <div id="discipline">
+                <h3>run</h3>
+                <div id="annual_calendar_1"></div>
             </div>
-            <div id="annual_calendar_2">
-
+            <div id="discipline">
+                <h3>read</h3>
+                <div id="annual_calendar_2"></div>
             </div>
-            
             <script>
                 function createCalendar(elementId) {
                     tbody = document.createElement('table');
@@ -61,19 +62,27 @@
                     for(let i=0; i<53; i++) {
                         week_arr.push(i);
                     }
-                    
-                    day_arr.forEach(function(day) {
-                        let row = document.createElement('tr');
-                        row.className = day;
-                
-                        week_arr.forEach(function(week) {
-                            let col = document.createElement('td');           
-                
-                            col.style = 'width:12px; height:14px; background-Color:lightgrey; border-radius:2px;';
-                            row.appendChild(col);
+
+                    let sun = document.createElement('tr');
+                    let mon = document.createElement('tr');
+                    let tue = document.createElement('tr');
+                    let wed = document.createElement('tr');
+                    let thu = document.createElement('tr');
+                    let fri = document.createElement('tr');
+                    let sat = document.createElement('tr');
+
+                    const day_arr2 = [sun, mon, tue, wed, thu, fri, sat]
+
+                    day_arr2.forEach(function(day) {
+                        tbody.appendChild(day);
+                    });
+
+                    week_arr.forEach(function(week) {
+                        day_arr2.forEach(function(day) {
+                            let row = document.createElement('td');
+                            row.style = 'width:12px; height:12px; background-Color:lightgrey; border-radius:2px;';      
+                            day.appendChild(row);
                         });
-                
-                        tbody.appendChild(row);
                     });
                 
                     document.getElementById(elementId).appendChild(tbody);
