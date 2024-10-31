@@ -17,6 +17,7 @@ body {
 
 /* Blog Header */
 .blog-header {
+    min-width:640px;
     text-align: center;
     padding: 20px;
     background-color: #fff;
@@ -33,6 +34,7 @@ body {
 
 /* Menu Bar */
 .menu-bar {
+    min-width:640px;
     display: flex;
     justify-content: flex-start;
     background-color: #333;
@@ -117,6 +119,7 @@ body {
 
 /* Footer */
 .footer {
+    min-width:640px;
     background-color: #333;
     color: #eee;
     text-align: center;
