@@ -101,6 +101,35 @@ body {
     border: 1px solid #ccc;
 }
 
+.discipline-container {
+    margin-bottom: 10px;
+}
+
+.discipline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Aligns h3 to the left and button to the right */
+    margin-bottom: 5px;
+}
+
+.align-right {
+    padding: 3px 10px; /* Reduced padding for a smaller button */
+    font-size: 0.8rem; /* Slightly smaller font size */
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    color: #333;
+    background-color: transparent;
+    border: 1px solid #333;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.align-right:hover {
+    background-color: #333;
+    color: #fff;
+}
+
 /* Image Grid Styles */
 .image-grid {
     display: grid;
@@ -145,7 +174,7 @@ body {
 .info-box {
     position: absolute;
     width: 200px;
-    height: 300px;
+    height: 200px;
     background-color: lightyellow;
     border: 2px solid #333;
     border-radius: 8px;

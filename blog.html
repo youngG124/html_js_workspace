@@ -43,12 +43,18 @@
         <!-- Example Blog Post with Image Grid -->
         <div class="blog-post">
             <h2>Disciplines</h2>
-            <div id="discipline">
-                <h3>run</h3>
+            <div id="discipline" class="discipline-container">
+                <div class="discipline-header">
+                    <h3>run</h3>
+                    <button class="align-right">new</button>
+                </div>
                 <div id="annual_calendar_1"></div>
             </div>
-            <div id="discipline">
-                <h3>read</h3>
+            <div id="discipline" class="discipline-container">
+                <div class="discipline-header">
+                    <h3>read</h3>
+                    <button class="align-right">new</button>
+                </div>
                 <div id="annual_calendar_2"></div>
             </div>
             <script>
@@ -57,7 +63,7 @@
 
                 function createCalendar(elementId) {
                     tbody = document.createElement('table');
-                    tbody.style = 'border-spacing:3.5px;';
+                    tbody.style = 'border-spacing:4px;';
 
                     const week_arr = [];
                 
