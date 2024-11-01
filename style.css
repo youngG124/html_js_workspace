@@ -170,17 +170,39 @@ body {
     text-decoration: underline;
 }
 
-/* Style for the info box */
 .info-box {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    background-color: lightyellow;
-    border: 2px solid #333;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 10px;
+    width: 250px;
+    height: auto;
+    max-height: 250px;
+    background-color: #f9f9f9; /* Light off-white background */
+    border: 1px solid #ddd; /* Subtle border */
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    padding: 15px;
+    font-family: 'Georgia', serif; /* Elegant serif font */
+    font-size: 0.9rem;
+    color: #333; /* Dark gray text color */
+    line-height: 1.5;
     display: none; /* Initially hidden */
+}
+
+.info-box h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.info-box p {
+    margin-bottom: 10px;
+}
+
+.info-box a {
+    font-size: 0.85rem;
+    color: #0066cc; /* Subtle link color */
+    text-decoration: none;
+    font-weight: bold;
 }
 
 /* Modal overlay styling */
@@ -202,6 +224,7 @@ body {
     background-color: #fff;
     padding: 20px;
     width: 300px;
+    height: 250;
     border-radius: 5px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     text-align: center;

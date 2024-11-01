@@ -166,7 +166,9 @@
         </div>
 
         <!-- Box to display on hover -->
-        <div id="infoBox" class="info-box"></div>
+        <div id="infoBox" class="info-box">
+            <h4 id="infoBoxTitle"></h4>
+        </div>
 
         <!-- Example Blog Post with Image Grid -->
         <div class="blog-post">
@@ -202,41 +204,11 @@
     <!-- Footer -->
     <div data-include="footer.html"></div>
 
-    <script>
-        const infoBox = document.getElementById('infoBox');
-
-        // Function to show the info box with specific content
-        function showInfoBox(event, content) {
-            infoBox.style.display = 'block';
-            infoBox.style.left = `${event.pageX + 10}px`; // Position next to the mouse
-            infoBox.style.top = `${event.pageY + 10}px`;
-            infoBox.textContent = content; // Set the information content
-        }
-
-        // Function to hide the info box
-        function hideInfoBox() {
-            infoBox.style.display = 'none';
-        }
-
-        // Add event listeners to each hoverable <td> for showing/hiding the info box
-        document.querySelectorAll('.day').forEach(td => {
-            td.addEventListener('mouseenter', (event) => {
-                showInfoBox(event, td.getAttribute('data-info'));
-            });
-            td.addEventListener('mousemove', (event) => {
-                showInfoBox(event, td.getAttribute('data-info'));
-            });
-            td.addEventListener('mouseleave', hideInfoBox);
-        });
-    </script>
-
-
-
     <div id="modal" class="modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
             <h3>Submit Your Record</h3>
-            <input type="text" id="user-input" maxlength="50" placeholder="Enter a short message (max 50 chars)" />
+            <input type="text" id="user-input" maxlength="35" placeholder="Enter a short message (max 35 chars)" />
             <button id="submit-button">Submit</button>
         </div>
     </div>
@@ -278,6 +250,35 @@
             } else {
                 alert('Please enter a valid message.');
             }
+        });
+    </script>
+
+    <script>
+        const infoBox = document.getElementById('infoBox');
+        const infoBoxTitle = document.getElementById('infoBoxTitle');
+
+        // Function to show the info box with specific content
+        function showInfoBox(event, content) {
+            infoBox.style.display = 'block';
+            infoBox.style.left = `${event.pageX + 10}px`; // Position next to the mouse
+            infoBox.style.top = `${event.pageY + 10}px`;
+            infoBoxTitle.textContent = content; // Set the information content
+        }
+
+        // Function to hide the info box
+        function hideInfoBox() {
+            infoBox.style.display = 'none';
+        }
+
+        // Add event listeners to each hoverable <td> for showing/hiding the info box
+        document.querySelectorAll('.day').forEach(td => {
+            td.addEventListener('mouseenter', (event) => {
+                showInfoBox(event, td.getAttribute('data-info'));
+            });
+            td.addEventListener('mousemove', (event) => {
+                showInfoBox(event, td.getAttribute('data-info'));
+            });
+            td.addEventListener('mouseleave', hideInfoBox);
         });
     </script>
 </body>
