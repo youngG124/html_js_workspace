@@ -43,6 +43,7 @@
         <!-- Example Blog Post with Image Grid -->
         <div class="blog-post">
             <h2>Disciplines</h2>
+            <br>
             <div id="discipline" class="discipline-container">
                 <div class="discipline-header">
                     <h3>run</h3>
@@ -50,6 +51,7 @@
                 </div>
                 <div id="annual_calendar_1"></div>
             </div>
+            <br>
             <div id="discipline" class="discipline-container">
                 <div class="discipline-header">
                     <h3>read</h3>
@@ -140,7 +142,11 @@
                         styleString += 'background-Color:lightgrey;'
                     }
 
-                    let day_data_string = "date : " + subtractDays(today, 365 - dayNumber);
+                    // 마지막 주 직전 날이 day 363, 마지막 주에 추가 된 day 수가 dayIndex(목요일이면 4)
+                    // 둘의 합에서 dayNumber를 빼면 거슬러 가야 하는 날짜가 나옴. dayNumber가 0일 경우
+                    // 목요일이라면 today - 367(363에 4를 더함)을 한 날짜가 day 0.
+                    // 오늘을 구한다면 363 + dayIndex 가 dayNumber와 같으므로, 결국 today - 0 이므로 오늘이 됨.
+                    let day_data_string = "date : " + subtractDays(today, 363 + dayIndex - dayNumber);
 
                     row.setAttribute('data-info', day_data_string);
                     row.className = 'day';
