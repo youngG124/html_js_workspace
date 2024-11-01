@@ -60,6 +60,20 @@
                 <div id="annual_calendar_2"></div>
             </div>
             <script>
+                // get All Discipline datas from DB at this point
+                // every discipline and discipline metadatas
+                // annual-records of each disciplines
+                // data would be like :
+                const data = {
+                    disciplineName : "run",
+                    disciplineIcon : "something like icon"
+                }
+
+                const disciplineList = [data1, data2, data3, andOrSo, "..."];
+                // we need to make annual calendar via this list
+                // and get annual data with the discipline name from DB
+                // and paint the calendar green with the data
+
                 const today = new Date();
                 const dayIndex = today.getDay();
 
@@ -128,7 +142,7 @@
                     });
                 
                     document.getElementById(elementId).appendChild(tbody);
-                }                
+                }
                 
                 createCalendar('annual_calendar_1')
                 createCalendar('annual_calendar_2')
@@ -215,6 +229,8 @@
 
     
     <script>
+        // record today button modal
+
         // Get elements
         const modal = document.getElementById('modal');
         const openButton = document.querySelector('.align-right');
@@ -254,6 +270,8 @@
     </script>
 
     <script>
+        // day box hover info box
+
         const infoBox = document.getElementById('infoBox');
         const infoBoxTitle = document.getElementById('infoBoxTitle');
 
