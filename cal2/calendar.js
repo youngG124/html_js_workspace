@@ -1,102 +1,75 @@
-const calendarBody = document.getElementById('calendar-body');
-const monthYear = document.getElementById('month-year');
+const calendarBody = document.getElementById("calendar-body");
+const monthYearDisplay = document.getElementById("month-year");
+const prevMonthButton = document.getElementById("prev-month");
+const nextMonthButton = document.getElementById("next-month");
 
 let currentDate = new Date();
 
-function loadCalendar(date) {
-  // Clear the previous calendar
-  calendarBody.innerHTML = '';
+function renderCalendar(date) {
+  // Clear previous calendar
+  calendarBody.innerHTML = "";
 
+  // Set month and year title
+  const month = date.getMonth();
   const year = date.getFullYear();
-  let month = date.getMonth();
-  
-  // Get first and last day of the month
-  const firstDayOfMonth = new Date(year, month, 1).getDay();
+  monthYearDisplay.textContent = date.toLocaleDateString("en-US", {
+    month: "long",
+    year: "numeric"
+  });
+
+  // Determine the first day of the month and number of days in the month
+  const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-  // Update month and year
-  monthYear.innerText = `${date.toLocaleString('default', { month: 'long' })} ${year}`;
-
   let day = 1;
-
-  // Create 6 rows for the calendar
   for (let i = 0; i < 6; i++) {
-    const row = document.createElement('tr');
+    const row = document.createElement("tr");
 
-    // Create 7 columns for days
     for (let j = 0; j < 7; j++) {
-      const cell = document.createElement('td');
-      
-      // Fill the first row with empty cells until the first day of the month
-      if (i === 0 && j < firstDayOfMonth) {
-        cell.innerText = '';
+      const cell = document.createElement("td");
+
+      if (i === 0 && j < firstDay) {
+        // Empty cell before the first day of the month
+        cell.innerHTML = "";
       } else if (day > daysInMonth) {
-        break;
+        // Empty cell after the last day of the month
+        cell.innerHTML = "";
       } else {
-        // Add the day number and the image
-        const dayNumber = document.createElement('div');
-        dayNumber.className = 'day-number';
-        dayNumber.innerText = day;
+        // Add day number and optional background image
+        const dayNumber = document.createElement("span");
+        dayNumber.textContent = day;
+        dayNumber.classList.add("day-number");
 
-        const img = document.createElement('img');
-        // Replace 'your-image-path.jpg' with the path to your actual image
-        // img.src = `https://via.placeholder.com/150?text=${day}`;
-        //img.src = `imgs/${year}${month}`;
-        let srcimg = 'http://127.0.0.1:8000/image/' + searchImage(year,month+1,day);
-        if(doesFileExist(srcimg)) {
-          console.log(srcimg)
-          img.src = `${srcimg}`
-        }
+        // Example of setting a background image (replace with your image source)
+        const img = document.createElement("img");
+        img.src = `images/${month + 1}_${day}.jpg`; // Adjust to match your image naming convention
 
-        cell.appendChild(img); // Add the image to the cell
-        cell.appendChild(dayNumber); // Add the day number on top
-
+        cell.appendChild(img);
+        cell.appendChild(dayNumber);
         day++;
       }
+
       row.appendChild(cell);
     }
+
     calendarBody.appendChild(row);
   }
 }
 
-function searchImage(year, month, day) {
-  if(month.toString().length == 1) {
-    month = '0' + month
-  }
-  if(day.toString().length == 1) {
-    day = '0' + day
-  }
-
-  return year.toString() + month.toString() + day.toString() + '_0';
+// Navigation functions
+function goToNextMonth() {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar(currentDate);
 }
 
-function doesFileExist(urlToFile)
-{
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', urlToFile, false);
-    xhr.send();
-
-    if (xhr.status == "404") {
-        console.log("파일이 존재하지 않아요!");
-        return false;
-    } else {
-        console.log("파일이 있어요.");
-        return true;
-    }
+function goToPreviousMonth() {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar(currentDate);
 }
 
-// Detect scroll to switch months
-document.addEventListener('wheel', function(event) {
-  if (event.deltaY < 0) {
-    // Scrolled up, go to previous month
-    currentDate.setMonth(currentDate.getMonth() - 1);
-    loadCalendar(currentDate);
-  } else if (event.deltaY > 0) {
-    // Scrolled down, go to next month
-    currentDate.setMonth(currentDate.getMonth() + 1);
-    loadCalendar(currentDate);
-  }
-});
+// Event listeners for buttons
+nextMonthButton.addEventListener("click", goToNextMonth);
+prevMonthButton.addEventListener("click", goToPreviousMonth);
 
-// Load the calendar for the current month on page load
-loadCalendar(currentDate);
+// Initial calendar render
+renderCalendar(currentDate);
