@@ -37,7 +37,6 @@ body {
   th, td {
     padding: 15px;          /* Increased padding for better spacing */
     border: 1px solid #e0e0e0;
-    text-align: center;
     vertical-align: top;
     position: relative;
     font-size: 1.1rem;      /* Slightly larger font for readability */
@@ -46,9 +45,15 @@ body {
   
   th {
     font-weight: normal;
+    text-align: center;
+    height: 5px;
     background-color: #f7f7f7;
     color: #444;
     border-bottom: 2px solid #ddd;
+  }
+
+  td {
+    text-align:left;
   }
   
   td img {
