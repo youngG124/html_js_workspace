@@ -11,7 +11,7 @@ body {
 }
 
 #calendar {
-  width: 90%;
+  width: 97%;
   max-width: 800px;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -95,4 +95,11 @@ td .day-number {
 
 .prev-next:hover {
   background-color: #e0e0e0;
+}
+
+.today {
+  background-color: #ffeb3b; /* Light yellow background to highlight today */
+  color: #333;               /* Text color for readability */
+  font-weight: bold;         /* Make the text bold */
+  border: 2px solid #fbc02d; /* Optional: border to make it stand out */
 }

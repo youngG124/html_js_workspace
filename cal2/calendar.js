@@ -21,6 +21,12 @@ function renderCalendar(date) {
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+  // Get today's date for comparison
+  const today = new Date();
+  const todayDate = today.getDate();
+  const todayMonth = today.getMonth();
+  const todayYear = today.getFullYear();
+
   let day = 1;
   for (let i = 0; i < 6; i++) {
     const row = document.createElement("tr");
@@ -39,6 +45,11 @@ function renderCalendar(date) {
         const dayNumber = document.createElement("span");
         dayNumber.textContent = day;
         dayNumber.classList.add("day-number");
+
+        // Check if this day is today
+        if (day === todayDate && month === todayMonth && year === todayYear) {
+          cell.classList.add("today"); // Add the "today" class for today's date
+        }
 
         // Example of setting a background image (replace with your image source)
         const img = document.createElement("img");
