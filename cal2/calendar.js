@@ -53,7 +53,7 @@ function renderCalendar(date) {
 
         // Example of setting a background image (replace with your image source)
         const img = document.createElement("img");
-        // img.src = `images/${month + 1}_${day}.jpg`; // Adjust to match your image naming convention
+        img.src = `images/${month + 1}_${day}.jpg`; // Adjust to match your image naming convention
 
         cell.appendChild(img);
         cell.appendChild(dayNumber);
@@ -73,7 +73,7 @@ function renderCalendar(date) {
 
 // Function to handle <td> clicks
 function onCellClick(day, month, year) {
-  alert(`You clicked on: ${day}/${month + 1}/${year}`);
+  console.log(`You clicked on: ${day}/${month + 1}/${year}`);
   // Add your custom action here, e.g., show details or open a modal
 }
 
