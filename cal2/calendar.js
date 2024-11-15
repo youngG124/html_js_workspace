@@ -59,7 +59,7 @@ function renderCalendar(date) {
         cell.appendChild(dayNumber);
 
         // Attach click event listener to the <td>
-        cell.addEventListener("click", () => onCellClick(day, month, year));
+        cell.addEventListener("click", () => onCellClick(dayNumber.textContent, month, year));
 
         day++;
       }
@@ -72,8 +72,8 @@ function renderCalendar(date) {
 }
 
 // Function to handle <td> clicks
-function onCellClick(day_, month, year) {
-  alert(`You clicked on: ${day_}/${month + 1}/${year}`);
+function onCellClick(day, month, year) {
+  alert(`You clicked on: ${day}/${month + 1}/${year}`);
   // Add your custom action here, e.g., show details or open a modal
 }
 
