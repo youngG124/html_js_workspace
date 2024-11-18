@@ -5,6 +5,12 @@ const nextMonthButton = document.getElementById("next-month");
 
 let currentDate = new Date();
 
+// Get today's date for comparison
+const today = new Date();
+const todayDate = today.getDate(); 
+const todayMonth = today.getMonth();
+const todayYear = today.getFullYear();
+
 function renderCalendar(date) {
   // Clear previous calendar
   calendarBody.innerHTML = "";
@@ -21,11 +27,7 @@ function renderCalendar(date) {
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-  // Get today's date for comparison
-  const today = new Date();
-  const todayDate = today.getDate();
-  const todayMonth = today.getMonth();
-  const todayYear = today.getFullYear();
+
 
   let day = 1;
   for (let i = 0; i < 6; i++) {
@@ -73,8 +75,10 @@ function renderCalendar(date) {
 
 // Function to handle <td> clicks
 function onCellClick(day, month, year) {
-  console.log(`You clicked on: ${day}/${month + 1}/${year}`);
-  // Add your custom action here, e.g., show details or open a modal
+  if(todayDate >= day) {
+    console.log(`You clicked on: ${day}/${month + 1}/${year}`);
+    // Add your custom action here, e.g., show details or open a modal
+  } 
 }
 
 // Navigation functions
